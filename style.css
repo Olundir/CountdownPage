@@ -18,7 +18,6 @@ body {
   grid-template-rows: auto;
   column-gap: 3rem;
   max-width: 80vw;
-  /* padding: ; */
 }
 
 .tWrap {
@@ -58,9 +57,13 @@ body {
   clip-path: polygon(100% 50%, 100% 100%, 0 100%, 0 50%);
   z-index: 1;
 }
+.topNext {
+  visibility: hidden;
+}
 
 .bottomNext {
   clip-path: polygon(100% 0, 100% 50%, 0 50%, 0 0);
+  visibility: hidden;
 }
 .placeholder {
   visibility: hidden;
@@ -68,6 +71,10 @@ body {
 
 .putOnTop {
   z-index: 10;
+  visibility: visible;
+}
+
+.visibility {
   visibility: visible;
 }
 
