@@ -1,0 +1,90 @@
+body {
+  font-family: "Red Hat Text", sans-serif;
+  text-align: center;
+  font-size: 10px;
+  font-size: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.attribution {
+  margin-top: 2rem;
+  font-size: 1rem;
+}
+.clock {
+  background-color: blue;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  column-gap: 3rem;
+  max-width: 80vw;
+  /* padding: ; */
+}
+
+.tWrap {
+  background-color: red;
+  width: 12rem;
+  height: 10rem;
+  border: 1px solid black;
+  position: relative;
+}
+
+.card {
+  background-color: blueviolet;
+  position: absolute;
+  width: 12rem;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8rem;
+  transform-style: preserve-3d;
+}
+
+.topAnimation {
+  animation: turn 0.5s 0s linear both;
+  background-color: green;
+  clip-path: polygon(100% 0, 100% 50%, 0 50%, 0 0);
+  z-index: 4;
+}
+
+.bottom {
+  clip-path: polygon(100% 50%, 100% 100%, 0 100%, 0 50%);
+}
+
+.topNextAnimation {
+  animation: turn2 0.5s 0.5s linear both;
+  background-color: yellow;
+  clip-path: polygon(100% 50%, 100% 100%, 0 100%, 0 50%);
+  z-index: 1;
+}
+
+.bottomNext {
+  clip-path: polygon(100% 0, 100% 50%, 0 50%, 0 0);
+}
+.placeholder {
+  visibility: hidden;
+}
+
+.putOnTop {
+  z-index: 10;
+  visibility: visible;
+}
+
+@keyframes turn2 {
+  0% {
+    transform: rotateX(-90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes turn {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(-90deg);
+  }
+}
