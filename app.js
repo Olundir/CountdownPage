@@ -4,28 +4,42 @@ const topC = document.querySelectorAll(".bottom");
 const bottomC = document.querySelectorAll(".bottomNext");
 const placeholder = document.querySelectorAll(".placeholder");
 
-const changeSeconds = async () => {
-  topAnim[3].classList.add("topAnimation");
-  bottomAnim[3].classList.add("topNextAnimation", "visibility");
-  bottomC[3].classList.add("visibility");
+const flipCard = async (index) => {
+  placeholder[index].classList.remove("putOnTop");
+  topAnim[index].classList.add("topAnimation");
+  bottomAnim[index].classList.add("topNextAnimation", "visibility");
+  bottomC[index].classList.add("visibility");
   setTimeout(() => {
-    placeholder[3].classList.add("putOnTop");
-    placeholder[0].classList.add("putOnTop");
-    placeholder[0].innerText = "0";
-  }, 1000);
+    placeholder[index].classList.add("putOnTop");
+    placeholder[index].innerText = placeholder[index].innerText - 1;
+    changeValue(index);
+    reset(index);
+  }, 950);
 };
 
-const changeValSeconds = () => {
-  return parseInt((topAnim[3].value = topAnim[3].value - 1));
+const changeValue = async (index) => {
+  topAnim[index].innerText = parseInt(topAnim[index].innerText - 1);
+  topC[index].innerText = parseInt(topC[index].innerText - 1);
+  bottomAnim[index].innerText = parseInt(bottomAnim[index].innerText - 1);
+  bottomC[index].innerText = parseInt(bottomC[index].innerText - 1);
 };
 
-// function to manage the time change
-const changeTime = async () => {
-  changeSeconds();
+const reset = async (index) => {
+  topAnim[index].classList.remove("topAnimation");
+  bottomAnim[index].classList.remove("topNextAnimation", "visibility");
+  bottomC[index].classList.remove("visibility");
+  placeholder[index].classList.remove("putOnTop");
+};
+
+const initialize = async () => {
+  flipCard(3);
 };
 
 // this sets off the timer
-setInterval(function () {
-  changeTime();
-  console.log("I changed");
-}, 1000);
+let time = setInterval(initialize, 1000);
+
+function stopTime() {
+  clearInterval(time);
+}
+
+// ------------------------------------------- //
