@@ -1,15 +1,19 @@
-const topAnim = document.querySelectorAll(".top");
-const bottomAnim = document.querySelectorAll(".topNext");
-const topC = document.querySelectorAll(".bottom");
-const bottomC = document.querySelectorAll(".bottomNext");
-const placeholder = document.querySelectorAll(".placeholder");
-let minTim = parseInt(topC[3].innerText) + parseInt(topC[2].innerText * 60) - 1;
-let hTim = parseInt(topC[3].innerText) + parseInt(topC[2].innerText * 60) + parseInt(topC[1].innerText * 3600) - 1;
+const topCard = document.querySelectorAll(".top");
+const topNext = document.querySelectorAll(".topNext");
+const bottom = document.querySelectorAll(".bottom");
+const bottomNext = document.querySelectorAll(".bottomNext");
+const topShadow = document.querySelectorAll(".topShadow");
+const bottomShadow = document.querySelectorAll(".bottomShadow");
+let minTim = parseInt(bottom[3].innerText) + parseInt(bottom[2].innerText * 60) - 1;
+let hTim = parseInt(bottom[3].innerText) + parseInt(bottom[2].innerText * 60) + parseInt(bottom[1].innerText * 3600) - 1;
 
 const flipCard = async (index, number) => {
-  topAnim[index].classList.add("topAnimation");
-  bottomAnim[index].classList.add("topNextAnimation", "visibility");
-  bottomC[index].classList.add("visibility");
+  topCard[index].classList.add("topAnimation");
+  topNext[index].classList.add("topNextAnimation", "visibility");
+  bottomNext[indexCheck(index)].classList.add("visibility");
+  // SHADOWS BELOW
+  bottomShadow[index].classList.add("shadowBottom");
+  topShadow[index].classList.add("shadowTop", "visibility");
   setTimeout(() => {
     changeValueMinSec(index, number);
     reset(index);
@@ -17,33 +21,49 @@ const flipCard = async (index, number) => {
 };
 
 const changeValueMinSec = async (index, number) => {
-  if (topC[index].innerText === "0") {
-    topAnim[index].innerText = number; // number
-    topC[index].innerText = number;
-    bottomAnim[index].innerText = number - 1; // number - 1
-    bottomC[index].innerText = number - 1;
-  } else if (topC[index].innerText === "1") {
-    topAnim[index].innerText = 0;
-    topC[index].innerText = 0;
-    bottomAnim[index].innerText = number; // number
-    bottomC[index].innerText = number;
+  if (bottom[indexCheck(index)].innerText === "0") {
+    topCard[index].innerText = number; // number
+    bottom[indexCheck(index)].innerText = number;
+    bottomShadow[index].innerText = number;
+    topNext[index].innerText = number - 1; // number - 1
+    bottomNext[indexCheck(index)].innerText = number - 1;
+    topShadow[index].innerText = number - 1;
+  } else if (bottom[indexCheck(index)].innerText === "1") {
+    topCard[index].innerText = 0;
+    bottom[indexCheck(index)].innerText = 0;
+    bottomShadow[index].innerText = 0;
+    topNext[index].innerText = number; // number
+    bottomNext[indexCheck(index)].innerText = number;
+    topShadow[index].innerText = number;
   } else {
-    topAnim[index].innerText = parseInt(topAnim[index].innerText - 1);
-    topC[index].innerText = parseInt(topC[index].innerText - 1);
-    bottomAnim[index].innerText = parseInt(bottomAnim[index].innerText - 1);
-    bottomC[index].innerText = parseInt(bottomC[index].innerText - 1);
+    topCard[index].innerText = parseInt(topCard[index].innerText - 1);
+    bottom[indexCheck(index)].innerText = parseInt(bottom[indexCheck(index)].innerText - 1);
+    bottomShadow[index].innerText = parseInt(bottomShadow[index].innerText - 1);
+    topNext[index].innerText = parseInt(topNext[index].innerText - 1);
+    bottomNext[indexCheck(index)].innerText = parseInt(bottomNext[indexCheck(index)].innerText - 1);
+    topShadow[index].innerText = parseInt(topShadow[index].innerText - 1);
+  }
+};
+const indexCheck = (index) => {
+  if (index === 0) {
+    return 0;
+  } else {
+    return index * 2;
   }
 };
 
 const reset = async (index) => {
-  topAnim[index].classList.remove("topAnimation");
-  bottomAnim[index].classList.remove("topNextAnimation", "visibility");
-  bottomC[index].classList.remove("visibility");
+  topCard[index].classList.remove("topAnimation");
+  topNext[index].classList.remove("topNextAnimation", "visibility");
+  bottomNext[indexCheck(index)].classList.remove("visibility");
+  // SHADOWS BELOW
+  bottomShadow[index].classList.remove("shadowBottom");
+  topShadow[index].classList.remove("shadowTop", "visibility");
 };
 
 const initialize = async () => {
   flipCard(3, 59);
-  if (topC[3].innerText === "1") {
+  if (bottom[6].innerText === "1") {
     flipCard(2, 59);
   }
   if (minTim === 0) {
