@@ -8,6 +8,8 @@ https://olundir.github.io/CountdownPage/ IN PROGRESS
 
 ## Focus of this project:
 
+Vanilla JS logic behind changing the cards (its not as simple as just decreasing the numbers inside)
+
 ### Notes:
 
 Card design:
