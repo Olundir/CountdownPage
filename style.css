@@ -199,11 +199,3 @@ svg:hover path {
     color: hsla(345, 95%, 68%, 0.644);
   }
 }
-/* @media (max-width: 780px) {
-  :root {
-    font-size: 7px;
-  }
-  .clock {
-    height: 55vh;
-  }
-} */
